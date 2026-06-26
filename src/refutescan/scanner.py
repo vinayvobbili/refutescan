@@ -31,12 +31,11 @@ from concurrent.futures import ThreadPoolExecutor, TimeoutError as _FTimeout
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
-from .codemap import build_map
 from .fileaccess import LocalFileAccess, SandboxFileAccess
 from .models import ScanConfig, ScanResult, Verdict
 from .providers import JudgeFactory, NavigatorFactory
-from .safety import GIT_ALLOWED_PROTOCOLS, safe_path, within_allowed_roots
-from .vulns import SEVERITIES, VALID_CLASSES, VULN_CLASSES
+from .safety import GIT_ALLOWED_PROTOCOLS, within_allowed_roots
+from .vulns import SEVERITIES, VALID_CLASSES
 
 logger = logging.getLogger(__name__)
 

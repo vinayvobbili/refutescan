@@ -11,7 +11,6 @@ call ``refutescan.scan`` directly with your own factories.
 from __future__ import annotations
 
 import argparse
-import json
 import subprocess
 import sys
 

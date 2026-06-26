@@ -2,7 +2,6 @@
 spine (code map, path safety, summary, the navigate/validate plumbing) with
 fakes injected through the same seams a real model would use."""
 
-import os
 from pathlib import Path
 
 import pytest
