@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "refutescan"
+version = "0.1.0"
+description = "A two-LLM, refute-first agentic source-code vulnerability scanner — wide-net navigate, skeptical refute, jailed in docker. Bring your own LLM."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Vinay Vobbilichetty", email = "vinayvobbilichetty11@gmail.com" }]
+keywords = [
+    "security", "sast", "vulnerability-scanner", "appsec", "code-security",
+    "agentic", "llm", "ai-security", "static-analysis", "secure-code-review",
+    "false-positive-reduction", "supply-chain", "sandbox",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Topic :: Software Development :: Quality Assurance",
+]
+# Core: the kernel + the LangChain interface the navigator/judge speak. Provider
+# SDKs are opt-in extras — bring your own model.
+dependencies = [
+    "pydantic>=2",
+    "langchain-core>=0.3",
+]
+
+[project.optional-dependencies]
+openai = ["langchain-openai>=0.1"]
+dev = [
+    "pytest>=7",
+    "ruff>=0.4",
+    "build>=1.0",
+    "twine>=5.0",
+]
+
+[project.scripts]
+refutescan = "refutescan.cli:main"
+refutescan-build-sandbox = "refutescan.cli:build_sandbox"
+
+[project.urls]
+Homepage = "https://github.com/vinayvobbili/refutescan"
+Repository = "https://github.com/vinayvobbili/refutescan"
+Issues = "https://github.com/vinayvobbili/refutescan/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+# The sandbox image source ships with the package so `refutescan-build-sandbox`
+# can build it from the installed location.
+"refutescan.sandbox" = ["Dockerfile", "build.sh", "toolrunner.py"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
